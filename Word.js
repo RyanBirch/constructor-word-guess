@@ -1,5 +1,5 @@
 const letter = require('./Letter.js')
-let Letter = letter.Letter
+const Letter = letter.Letter
 
 function Word(currentWord) {
     this.currentWord = currentWord
@@ -23,10 +23,18 @@ function Word(currentWord) {
             elem.checkChar(userGuess)
         })
     }
+    this.isSolved = function() {
+        this.word.forEach( elem => {
+            if (elem.guessed === false) return false
+        })
+        return true
+    }
 }
 
-let word = new Word('hello') 
-word.renderWord()
-word.guessLetter('l')
-word.guessLetter('e')
-word.renderWord()
+exports.Word = Word
+
+// let word = new Word('hello') 
+// word.renderWord()
+// word.guessLetter('l')
+// word.guessLetter('e')
+// word.renderWord()

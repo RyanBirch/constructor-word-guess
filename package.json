@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/RyanBirch/constructor-word-guess#readme",
   "dependencies": {
-    "prompt": "^1.0.0"
+    "inquirer": "^6.3.1"
   }
 }
