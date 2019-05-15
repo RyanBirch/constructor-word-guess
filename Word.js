@@ -23,18 +23,14 @@ function Word(currentWord) {
             elem.checkChar(userGuess)
         })
     }
+    // check if user has guessed every letter
     this.isSolved = function() {
+        let check = true
         this.word.forEach( elem => {
-            if (elem.guessed === false) return false
+            if (elem.guessed === false) check = false
         })
-        return true
+        return check
     }
 }
 
 exports.Word = Word
-
-// let word = new Word('hello') 
-// word.renderWord()
-// word.guessLetter('l')
-// word.guessLetter('e')
-// word.renderWord()

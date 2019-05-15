@@ -19,6 +19,18 @@ function getUserGuess() {
         .then( response => {
             word.guessLetter(response.userGuess)
             word.renderWord()
+            checkCompletion()
         })
 }
+
+function checkCompletion() {
+    if (word.isSolved()) {
+        console.log('You win!')
+        process.exit()
+    } else {
+        getUserGuess()
+    }
+}
+
+getUserGuess()
     
