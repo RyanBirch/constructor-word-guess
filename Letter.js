@@ -4,7 +4,7 @@ function Letter(char) {
     // if user guesses correctly we render the letter, otherwise render an underscore
     this.renderChar = function() {
         if (this.guessed) return this.char 
-        else return ' _'
+        else return ' _' 
     }
     // check user guess
     this.checkChar = function(userGuess) {
@@ -12,4 +12,4 @@ function Letter(char) {
     }
 }
 
-exports.Letter = Letter
+module.exports = Letter

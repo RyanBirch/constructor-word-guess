@@ -1,5 +1,4 @@
-const letter = require('./Letter.js')
-const Letter = letter.Letter
+const Letter = require('./Letter.js')
 
 function Word(currentWord) {
     this.currentWord = currentWord
@@ -33,4 +32,4 @@ function Word(currentWord) {
     }
 }
 
-exports.Word = Word
+module.exports = Word
