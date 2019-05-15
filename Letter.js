@@ -1,9 +1,9 @@
-function Letter(char, guessed) {
+function Letter(char) {
     this.char = char
-    this.guessed = guessed
+    this.guessed = false
     // if user guesses correctly we render the letter, otherwise render an underscore
-    this.render = function() {
-        if (guessed) return this.char 
+    this.renderChar = function() {
+        if (this.guessed) return this.char 
         else return ' _'
     }
     // check user guess
