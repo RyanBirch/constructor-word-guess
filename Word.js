@@ -18,9 +18,11 @@ function Word(currentWord) {
     }
     // run checkChar function on each Letter object
     this.guessLetter = function(userGuess) {
+        let correct = false
         this.word.forEach( elem => {
-            elem.checkChar(userGuess)
+            if (elem.checkChar(userGuess)) correct = true
         })
+        return correct
     }
     // check if user has guessed every letter
     this.isSolved = function() {

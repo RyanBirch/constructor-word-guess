@@ -8,7 +8,10 @@ function Letter(char) {
     }
     // check user guess
     this.checkChar = function(userGuess) {
-        if (userGuess === this.char) this.guessed = true 
+        if (userGuess === this.char) {
+            this.guessed = true 
+            return true
+        }
     }
 }
 

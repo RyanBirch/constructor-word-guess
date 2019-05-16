@@ -20,8 +20,11 @@ function getUserGuess() {
         ])
         .then( response => {
             // check if letter the user guessed is correct
-            word.guessLetter(response.userGuess)
+            if (!word.guessLetter(response.userGuess)) {
+                guessesRemaining --
+            }
             word.renderWord()
+            console.log('Guesses remaining: ' + guessesRemaining)
             checkCompletion()
         })
 }
@@ -30,6 +33,9 @@ function checkCompletion() {
     // if they have guessed every letter, the game is over
     if (word.isSolved()) {
         console.log('You win!')
+        process.exit()
+    } else if (guessesRemaining === 0) {
+        console.log('You lose :(')
         process.exit()
     } else {
         // if the game isn't over, they guess again
