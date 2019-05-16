@@ -1,7 +1,7 @@
 const inquirer = require('inquirer')
 const Word = require('./Word.js')
 
-let wordArray = ['well', 'hello', 'there']
+let wordArray = ['America', 'Canada', 'Australia', 'England', 'Spain', 'France', 'Russia', 'Germany', 'Italy']
 let currentWord = wordArray[Math.floor(Math.random() * wordArray.length)]
 let word = new Word(currentWord)
 let guessesRemaining = 10
@@ -27,7 +27,8 @@ function getUserGuess() {
             console.log('\n\n')
             word.renderWord()
             console.log('\nGuesses remaining: ' + guessesRemaining + '\n')
-            lettersGuessed.push(response.userGuess)
+            // add unique guesses to lettersGuessed array
+            if (!lettersGuessed.includes(response.userGuess)) lettersGuessed.push(response.userGuess)
             showLettersGuessed()
             checkCompletion()
         })
@@ -36,11 +37,11 @@ function getUserGuess() {
 function checkCompletion() {
     // if they have guessed every letter, the game is over
     if (word.isSolved()) {
-        console.log('You win!')
+        console.log('You win! \n')
         process.exit()
     } else if (guessesRemaining === 0) {
         // the user runs out of guesses
-        console.log('You lose :(')
+        console.log('You lose :( \n\nThe word was ' + currentWord + '\n')
         process.exit()
     } else {
         // if the game isn't over, they guess again
@@ -48,6 +49,7 @@ function checkCompletion() {
     }
 }
 
+// show the user the letters they have already guessed
 function showLettersGuessed() {
     let guessed = ''
     console.log('Letters already guessed: \n')
@@ -59,6 +61,11 @@ function showLettersGuessed() {
 }
 
 // display word masked with underscores at the start of the game
+console.log('\n\n')
+console.log('*******************************')
+console.log('  Hangman: Geography Edition!')
+console.log('*******************************')
+console.log('\n')
 console.log()
 word.renderWord()
 console.log()
