@@ -5,6 +5,7 @@ let wordArray = ['well', 'hello', 'there']
 let currentWord = wordArray[Math.floor(Math.random() * wordArray.length)]
 let word = new Word(currentWord)
 let guessesRemaining = 10
+let lettersGuessed = []
 
 
 function getUserGuess() {
@@ -23,8 +24,11 @@ function getUserGuess() {
             if (!word.guessLetter(response.userGuess)) {
                 guessesRemaining --
             }
+            console.log('\n\n')
             word.renderWord()
-            console.log('Guesses remaining: ' + guessesRemaining)
+            console.log('\nGuesses remaining: ' + guessesRemaining + '\n')
+            lettersGuessed.push(response.userGuess)
+            showLettersGuessed()
             checkCompletion()
         })
 }
@@ -35,6 +39,7 @@ function checkCompletion() {
         console.log('You win!')
         process.exit()
     } else if (guessesRemaining === 0) {
+        // the user runs out of guesses
         console.log('You lose :(')
         process.exit()
     } else {
@@ -43,7 +48,19 @@ function checkCompletion() {
     }
 }
 
+function showLettersGuessed() {
+    let guessed = ''
+    console.log('Letters already guessed: \n')
+
+    lettersGuessed.forEach( elem => {
+        guessed += elem + ' '
+    })
+    console.log(guessed + '\n')
+}
+
 // display word masked with underscores at the start of the game
+console.log()
 word.renderWord()
+console.log()
 getUserGuess()
     
