@@ -7,6 +7,7 @@ function Word(currentWord) {
     for (let i = 0; i < this.currentWord.length; i++) {
         let letter = new Letter(this.currentWord.charAt(i))
         this.word.push(letter)
+        if (letter.char === ' ') letter.guessed = true
     }
     // render word based on user guesses
     this.renderWord = function() {

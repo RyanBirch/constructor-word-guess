@@ -5,6 +5,6 @@
 
 <br>
 
-## Gameplay
 
+## Gameplay
 <img src="images/cwg.gif">

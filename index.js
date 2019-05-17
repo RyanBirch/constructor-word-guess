@@ -1,7 +1,7 @@
 const inquirer = require('inquirer')
 const Word = require('./Word.js')
 
-let wordArray = ['America', 'Canada', 'Australia', 'England', 'Spain', 'France', 'Russia', 'Germany', 'Italy']
+let wordArray = ['United States', 'Canada', 'Australia', 'New Zealand', 'United Kingdom', 'Spain', 'France', 'Russia', 'Germany', 'Italy', 'China', 'Japan', 'Brazil', 'Argentina']
 let currentWord = wordArray[Math.floor(Math.random() * wordArray.length)]
 let word = new Word(currentWord)
 let guessesRemaining = 10
@@ -27,6 +27,7 @@ function getUserGuess() {
             console.log('\n\n')
             word.renderWord()
             console.log('\nGuesses remaining: ' + guessesRemaining + '\n')
+
             // add unique guesses to lettersGuessed array
             if (!lettersGuessed.includes(response.userGuess)) lettersGuessed.push(response.userGuess)
             showLettersGuessed()
@@ -38,15 +39,52 @@ function checkCompletion() {
     // if they have guessed every letter, the game is over
     if (word.isSolved()) {
         console.log('You win! \n')
-        process.exit()
+        playAgain()
     } else if (guessesRemaining === 0) {
         // the user runs out of guesses
         console.log('You lose :( \n\nThe word was ' + currentWord + '\n')
-        process.exit()
+        playAgain()
     } else {
         // if the game isn't over, they guess again
         getUserGuess()
     }
+}
+
+// ask user if they want to play again
+function playAgain() {
+
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                message: 'Play again?',
+                choices: ['Yes', 'No'],
+                name: 'again'
+            }
+        ])
+        .then( answer => {
+            if (answer.again === 'Yes') {
+                // reset values
+                currentWord = wordArray[Math.floor(Math.random() * wordArray.length)]
+                word = new Word(currentWord)
+                guessesRemaining = 10
+                lettersGuessed = []
+
+                // reset game
+                console.log('\n\n')
+                console.log('*******************************')
+                console.log('  Hangman: Geography Edition!')
+                console.log('*******************************')
+                console.log('\n')
+                console.log()
+                word.renderWord()
+                console.log()
+                getUserGuess()
+
+            } else {
+                process.exit()
+            }
+        })
 }
 
 // show the user the letters they have already guessed
