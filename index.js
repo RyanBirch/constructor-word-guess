@@ -2,14 +2,11 @@ const inquirer = require('inquirer')
 const Word = require('./Word.js')
 
 let wordArray = ['United States', 'Canada', 'Australia', 'New Zealand', 'United Kingdom', 'Spain', 'France', 'Russia', 'Germany', 'Italy', 'China', 'Japan', 'Brazil', 'Argentina']
-let currentWord = wordArray[Math.floor(Math.random() * wordArray.length)]
-let word = new Word(currentWord)
-let guessesRemaining = 10
-let lettersGuessed = []
+let currentWord, word, guessesRemaining, lettersGuessed
 
 
+// get a letter from the user
 function getUserGuess() {
-
     // get user input
     inquirer
         .prompt([
@@ -35,6 +32,7 @@ function getUserGuess() {
         })
 }
 
+// check if the game is over
 function checkCompletion() {
     // if they have guessed every letter, the game is over
     if (word.isSolved()) {
@@ -52,7 +50,6 @@ function checkCompletion() {
 
 // ask user if they want to play again
 function playAgain() {
-
     inquirer
         .prompt([
             {
@@ -64,23 +61,8 @@ function playAgain() {
         ])
         .then( answer => {
             if (answer.again === 'Yes') {
-                // reset values
-                currentWord = wordArray[Math.floor(Math.random() * wordArray.length)]
-                word = new Word(currentWord)
-                guessesRemaining = 10
-                lettersGuessed = []
-
                 // reset game
-                console.log('\n\n')
-                console.log('*******************************')
-                console.log('  Hangman: Geography Edition!')
-                console.log('*******************************')
-                console.log('\n')
-                console.log()
-                word.renderWord()
-                console.log()
-                getUserGuess()
-
+                newGame()
             } else {
                 process.exit()
             }
@@ -98,14 +80,26 @@ function showLettersGuessed() {
     console.log(guessed + '\n')
 }
 
-// display word masked with underscores at the start of the game
-console.log('\n\n')
-console.log('*******************************')
-console.log('  Hangman: Geography Edition!')
-console.log('*******************************')
-console.log('\n')
-console.log()
-word.renderWord()
-console.log()
-getUserGuess()
-    
+// start a new game
+function newGame() {
+    // reset values
+    currentWord = wordArray[Math.floor(Math.random() * wordArray.length)]
+    word = new Word(currentWord)
+    guessesRemaining = 10
+    lettersGuessed = []
+
+    // initial game screen
+    console.log('\n\n')
+    console.log('*******************************')
+    console.log('  Hangman: Geography Edition!')
+    console.log('*******************************')
+    console.log('\n')
+    console.log()
+    word.renderWord()
+    console.log()
+    getUserGuess()
+}
+
+
+// begin game
+newGame()
