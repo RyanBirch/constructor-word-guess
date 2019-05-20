@@ -11,4 +11,4 @@
 <br>
 
 ## Gameplay
-<img src="images/cwg.gif">
+<img src="images/constructor-word-guess.gif">
